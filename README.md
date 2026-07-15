@@ -1,14 +1,16 @@
+
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# RFLC-SCP\_FutureProjections <img src="man/figures/compendium-sticker.png" align="right" style="float:right; height:120px;"/>
+# RFLC-SCP_FutureProjections <img src="man/figures/compendium-sticker.png" align="right" style="float:right; height:120px;"/>
 
 <!-- badges: start -->
 
-[![License: GPL (&gt;=
+[![License: GPL (\>=
 2)](https://img.shields.io/badge/License-GPL%20%28%3E%3D%202%29-blue.svg)](https://choosealicense.com/licenses/gpl-2.0/)
 <!-- badges: end -->
 
 <p align="left">
+
 • <a href="#overview">Overview</a><br> •
 <a href="#features">Features</a><br> •
 <a href="#content">Content</a><br> •
@@ -21,39 +23,101 @@
 
 ## Overview
 
-This research compendium… **{{ DESCRIBE YOUR PROJECT }}**
+This project provides all the data, codes and outputs used to produce
+the results presented in:
+
+Prima, M.-C., Si-Moussi, S., Garcia, N., Scherpenhuijzen, N., Verburg,
+P., Rouveyrol, P., Suarez, L., & Thuiller, W. (under review). Global and
+local future connectivity trends reveal potential mixed contribution of
+protected areas to species range shift. Global Change Biology.
 
 ## Features
 
-The main purpose of this compendium is to… **{{ DESCRIBE THE MAIN
-FEATURES }}**
+The workflow follows Prima et al. (2024)
+<https://besjournals.onlinelibrary.wiley.com/doi/10.1111/2041-210X.14444>,
+including:
+
+- Step 0. Cluster species in functional groups having similar traits and
+  environmental niches (not included here as it was already performed in
+  Prima et al., 2024 and Prima et al., 2025:
+  <https://conbio.onlinelibrary.wiley.com/doi/full/10.1111/conl.13148>).
+
+- Step 1. Generate future habitat suitability maps
+  (analyses/Rcode01_PrepSDMmaps.R)
+
+- Step 2. Generate future resistance and source maps for each group
+  based on the habitat suitability maps, and generate layers used for
+  the conditional arguments of Omniscape
+  (analyses/Rcode2_GetResisSuitMaps.R).
+
+- Step 3. Generate future steady and transient ecological continuities
+  per group (analyses/Rcode3_GetEcologicalContinuities.R, also requires
+  Julia scripts analyses/JuliaScript_OmniscapeRun.jl and
+  analyses/JuliaScript_OmniscapeRun_Transient.jl).
+
+- Step 4. Generate future steady and transient networks of protected
+  areas (analyses/Rcode04_GetNetworks.R)
+
+- Step 5. Calculate future steady and transient multi-scale network
+  metrics (analyses/Rcode05_GetConnMetrics.R and
+  analyses/Rcode05bis_GetConnMetricsTransient.R).
+
+- Step 6. Calculate other connectivity metrics (i.e., ecological
+  continuity areas analyses/Rcode06_GetECArea.R) and ecological
+  continuity-protected area overlap
+  (analyses/Rcode07_GetEC-PAsOverlap.R)
+
+- Step 7. Do statistical analyses and plot figures
+  (analyses/Rcode8_GetFigures.R).
+
+  First run the make.R file (at the root of the project) before any run
+  of R scripts. R functions are located in the R/ folder and are
+  automatically loaded when the make.R file is run. Function help can be
+  found by running the classic linecode help(‘function_name’).
+
+  Initial and intermediate datasets are located is the data/ folder  
+  Generated outputs are located in the outputs/ folder Figures of the
+  paper are located in the figures/ folder
 
 ## Content
 
 This repository is structured as follow:
 
--   [`DESCRIPTION`](https://github.com/mcpri3/RFLC-SCP_FutureProjections/tree/master/DESCRIPTION):
-    contains project metadata (authors, date, dependencies, etc.)
+- [`DESCRIPTION`](https://github.com/mcpri3/RFLC-SCP_FutureProjections/tree/master/DESCRIPTION):
+  contains project metadata (authors, date, dependencies, etc.)
 
--   [`make.R`](https://github.com/mcpri3/RFLC-SCP_FutureProjections/tree/master/make.R):
-    main R script to run the entire project
+- [`make.R`](https://github.com/mcpri3/RFLC-SCP_FutureProjections/tree/master/make.R):
+  main R script to run the entire project
 
--   [`R/`](https://github.com/mcpri3/RFLC-SCP_FutureProjections/tree/master/R):
-    contains R functions developed especially for this project
+- [`R/`](https://github.com/mcpri3/RFLC-SCP_FutureProjections/tree/master/R):
+  contains R functions developed especially for this project
 
--   **{{ LIST ADDITIONAL FILES/FOLDER }}**
+- [`analyses/`](https://github.com/mcpri3/RFLC-SCP/tree/master/analyses):
+  contains R scripts to run each step of the workflow
+
+- [`data/raw-data/`](https://www.kaggle.com/datasets/mariecarolineprima/rflc-scp-data-folder):
+  contains all raw data required to perform analyses
+
+- [`data/derived-data/`](https://www.kaggle.com/datasets/mariecarolineprima/rflc-scp-data-folder):
+  contains all intermediate data created during the workflow
+
+- [`outputs/`](https://www.kaggle.com/datasets/mariecarolineprima/rflc-scp-outputs-folder):
+  contains final data created during the workflow
+
+- [`figures/`](https://github.com/mcpri3/RFLC-SCP/tree/master/figures):
+  contains all the figures created during the workflow
 
 ## Installation
 
 To install this compendium:
 
--   [Fork](https://docs.github.com/en/get-started/quickstart/contributing-to-projects)
-    this repository using the GitHub interface.
--   [Clone](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)
-    your fork using `git clone fork-url` (replace `fork-url` by the URL
-    of your fork). Alternatively, open [RStudio
-    IDE](https://posit.co/products/open-source/rstudio/) and create a
-    New Project from Version Control.
+- [Fork](https://docs.github.com/en/get-started/quickstart/contributing-to-projects)
+  this repository using the GitHub interface.
+- [Clone](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)
+  your fork using `git clone fork-url` (replace `fork-url` by the URL of
+  your fork). Alternatively, open [RStudio
+  IDE](https://posit.co/products/open-source/rstudio/) and create a New
+  Project from Version Control.
 
 ## Usage
 
@@ -61,20 +125,26 @@ Launch the
 [`make.R`](https://github.com/mcpri3/RFLC-SCP_FutureProjections/tree/master/make.R)
 file with:
 
-    source("make.R")
+``` r
+source("make.R")
+```
 
 **Notes**
 
--   All required packages listed in the `DESCRIPTION` file will be
-    installed (if necessary)
--   All required packages and R functions will be loaded
--   Some analyses listed in the `make.R` might take time
+- All required packages listed in the `DESCRIPTION` file will be
+  installed (if necessary)
+- All required packages and R functions will be loaded
+- Some analyses listed in the `make.R` might take time
 
 ## Citation
 
 Please use the following citation:
 
-> **{{ ADD A CITATION }}**
+> Prima, M.-C., Si-Moussi, S., Garcia, N., Scherpenhuijzen, N., Verburg,
+> P., Rouveyrol, P., Suarez, L., & Thuiller, W. (under review). Global
+> and local future connectivity trends reveal potential mixed
+> contribution of protected areas to species range shift. Global Change
+> Biology.
 
 ## Contributing
 
@@ -85,11 +155,3 @@ Guidelines](https://github.com/mcpri3/RFLC-SCP_FutureProjections/blob/main/CONTR
 Please note that this project is released with a [Contributor Code of
 Conduct](https://contributor-covenant.org/version/2/1/CODE_OF_CONDUCT.html).
 By contributing to this project, you agree to abide by its terms.
-
-## Acknowledgments
-
-**{{ OPTIONAL SECTION }}**
-
-## References
-
-**{{ OPTIONAL SECTION }}**

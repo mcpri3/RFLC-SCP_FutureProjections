@@ -9,3 +9,8 @@
 ^CODE_OF_CONDUCT\.md$
 ^README\.Rmd$
 ^README\.html$
+^data/raw-data$
+^data/derived-data$
+^outputs$
+^figures$
+^analyses$

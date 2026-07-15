@@ -1,15 +1,37 @@
 Package: RFLC-SCP_FutureProjections
-Type: Package
-Title: The Title of the Project
+Type: Research project data and code distribution
+Title: Global and local future connectivity trends
 Version: 0.0.0.9000
 Authors@R: c(
     person(given   = "Marie-Caroline",
            family  = "Prima",
            role    = c("aut", "cre", "cph"),
            email   = "marie-caroline.prima@univ-grenoble-alpes.fr",
-           comment = c(ORCID = "{{orcid}}")))
-Description: A paragraph providing a full description of the project (on 
-    several lines...)
+           comment = c(ORCID = "{{0000-0001-9392-0022}}")))
+Description: This project provides all the data, codes and outputs used to produce the results presented in:
+  
+  Prima, M.-C., Si-Moussi, S., Garcia, N., Scherpenhuijzen, N., Verburg, P., Rouveyrol, P., Suarez, L., & Thuiller, W. (under review). 
+  Global and local future connectivity trends reveal potential mixed contribution of protected areas to species range shift. 
+  Global Change Biology. 
+  The workflow follows Prima et al. (2024) https://besjournals.onlinelibrary.wiley.com/doi/10.1111/2041-210X.14444, including:   
+  
+  Step 0. Cluster species in functional groups having similar traits and environmental niches (not included here as it was already performed in Prima et al., 2024 and Prima et al., 2025: https://conbio.onlinelibrary.wiley.com/doi/full/10.1111/conl.13148).
+  Step 1. Generate future habitat suitability maps (analyses/Rcode01_PrepSDMmaps.R)
+  Step 2. Generate future resistance and source maps for each group based on the habitat suitability maps, and generate layers used for the conditional arguments of Omniscape  (analyses/Rcode2_GetResisSuitMaps.R).
+  Step 3. Generate future steady and transient ecological continuities per group (analyses/Rcode3_GetEcologicalContinuities.R, also requires Julia scripts analyses/JuliaScript_OmniscapeRun.jl and analyses/JuliaScript_OmniscapeRun_Transient.jl).
+  Step 4. Generate future steady and transient networks of protected areas (analyses/Rcode04_GetNetworks.R)
+  Step 5. Calculate future steady and transient multi-scale network metrics (analyses/Rcode05_GetConnMetrics.R and analyses/Rcode05bis_GetConnMetricsTransient.R).
+  Step 6. Calculate other connectivity metrics (i.e., ecological continuity areas analyses/Rcode06_GetECArea.R) and ecological continuity-protected area overlap (analyses/Rcode07_GetEC-PAsOverlap.R) 
+  Step 7. Do statistical analyses and plot figures (analyses/Rcode8_GetFigures.R).
+  
+  First run the make.R file (at the root of the project) before any run of R scripts.
+  R functions are located in the R/ folder and are automatically loaded when the make.R file is run.
+  Function help can be found by running the classic linecode help('function_name'). 
+  
+  Initial and intermediate datasets are located is the data/ folder  
+  Generated outputs are located in the outputs/ folder 
+  Figures of the paper are located in the figures/ folder
+
 URL: https://github.com/mcpri3/RFLC-SCP_FutureProjections
 BugReports: https://github.com/mcpri3/RFLC-SCP_FutureProjections/issues
 License: GPL (>= 2)
@@ -17,5 +39,38 @@ Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 Imports: 
+    chngpt,
+    combinat,
+    cowplot,
+    data.table,
     devtools,
-    here
+    doParallel,
+    dplyr,
+    foreach,
+    future.apply,
+    gdistance,
+    ggalluvial,
+    ggplot2,
+    gifski,
+    grid,
+    gridExtra,
+    here,
+    htmlwidgets,
+    igraph,
+    insight,
+    janitor,
+    knitr,
+    lme4,
+    lmerTest,
+    MuMIn,
+    networkD3,
+    openxlsx,
+    parallel,
+    readr,
+    rjson,
+    rmarkdown,
+    rnaturalearth,
+    sf,
+    stringr,
+    terra
+VignetteBuilder: knitr
