@@ -79,7 +79,7 @@ including:
   Generated outputs are located in the outputs/ folder Figures of the
   paper are located in the figures/ folder
 
-  The full content of the project can be found on CatIndores, xx \##
+  The full content of the project can be found on InDoRES, xx \##
   Content
 
 This repository is structured as follow:
@@ -96,17 +96,17 @@ This repository is structured as follow:
 - [`analyses/`](https://github.com/mcpri3/RFLC-SCP/tree/master/analyses):
   contains R scripts to run each step of the workflow
 
-- [`data/raw-data/`](https://www.kaggle.com/datasets/mariecarolineprima/rflc-scp-data-folder):
-  contains all raw data required to perform analyses
+- [`data/raw-data/`](): contains all raw data required to perform
+  analyses (on InDoRES)
 
-- [`data/derived-data/`](https://www.kaggle.com/datasets/mariecarolineprima/rflc-scp-data-folder):
-  contains all intermediate data created during the workflow
+- [`data/derived-data/`](): contains all intermediate data created
+  during the workflow (on InDoRES)
 
-- [`outputs/`](https://www.kaggle.com/datasets/mariecarolineprima/rflc-scp-outputs-folder):
-  contains final data created during the workflow
+- [`outputs/`](): contains final data created during the workflow (on
+  InDoRES)
 
-- [`figures/`](https://github.com/mcpri3/RFLC-SCP/tree/master/figures):
-  contains all the figures created during the workflow
+- [`figures/`](): contains all the figures created during the workflow
+  (on InDoRES)
 
 ## Installation
 
