@@ -31,8 +31,6 @@ RFLC-SCP_FutureProjections <img src="man/figures/compendium-sticker.png" align="
   • <a href="#usage">Usage</a><br>
   • <a href="#citation">Citation</a><br>
   • <a href="#contributing">Contributing</a><br>
-  • <a href="#acknowledgments">Acknowledgments</a><br>
-  • <a href="#references">References</a>
 </p>
 
 

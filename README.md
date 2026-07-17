@@ -16,9 +16,7 @@
 <a href="#content">Content</a><br> •
 <a href="#installation">Installation</a><br> •
 <a href="#usage">Usage</a><br> • <a href="#citation">Citation</a><br> •
-<a href="#contributing">Contributing</a><br> •
-<a href="#acknowledgments">Acknowledgments</a><br> •
-<a href="#references">References</a>
+<a href="#contributing">Contributing</a><br>
 </p>
 
 ## Overview
@@ -40,7 +38,7 @@ including:
 - Step 0. Cluster species in functional groups having similar traits and
   environmental niches (not included here as it was already performed in
   Prima et al., 2024 and Prima et al., 2025:
-  <https://conbio.onlinelibrary.wiley.com/doi/full/10.1111/conl.13148>).
+  <https://conbio.onlinelibrary.wiley.com/doi/full/10.1111/conl.13148>)
 
 - Step 1. Generate future habitat suitability maps
   (analyses/Rcode01_PrepSDMmaps.R)
@@ -48,19 +46,19 @@ including:
 - Step 2. Generate future resistance and source maps for each group
   based on the habitat suitability maps, and generate layers used for
   the conditional arguments of Omniscape
-  (analyses/Rcode2_GetResisSuitMaps.R).
+  (analyses/Rcode2_GetResisSuitMaps.R)
 
 - Step 3. Generate future steady and transient ecological continuities
   per group (analyses/Rcode3_GetEcologicalContinuities.R, also requires
   Julia scripts analyses/JuliaScript_OmniscapeRun.jl and
-  analyses/JuliaScript_OmniscapeRun_Transient.jl).
+  analyses/JuliaScript_OmniscapeRun_Transient.jl)
 
 - Step 4. Generate future steady and transient networks of protected
   areas (analyses/Rcode04_GetNetworks.R)
 
 - Step 5. Calculate future steady and transient multi-scale network
   metrics (analyses/Rcode05_GetConnMetrics.R and
-  analyses/Rcode05bis_GetConnMetricsTransient.R).
+  analyses/Rcode05bis_GetConnMetricsTransient.R)
 
 - Step 6. Calculate other connectivity metrics (i.e., ecological
   continuity areas analyses/Rcode06_GetECArea.R) and ecological
@@ -68,7 +66,7 @@ including:
   (analyses/Rcode07_GetEC-PAsOverlap.R)
 
 - Step 7. Do statistical analyses and plot figures
-  (analyses/Rcode8_GetFigures.R).
+  (analyses/Rcode8_GetFigures.R)
 
   First run the make.R file (at the root of the project) before any run
   of R scripts. R functions are located in the R/ folder and are
@@ -79,8 +77,9 @@ including:
   Generated outputs are located in the outputs/ folder Figures of the
   paper are located in the figures/ folder
 
-  The full content of the project can be found on InDoRES, xx \##
-  Content
+  The full content of the project can be found on InDoRES
+
+## Content
 
 This repository is structured as follow:
 
