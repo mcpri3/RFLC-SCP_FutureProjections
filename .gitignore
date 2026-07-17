@@ -1,3 +1,7 @@
+# git files ----
+.github/*
+.gitignore
+.
 # macOS files ----
 .DS_Store
 
@@ -12,6 +16,7 @@
 # RStudio files ----
 *.Rproj
 .Rproj.user/
+.Rbuildignore
 
 # R Environment Variables ----
 .Renviron
