@@ -33,7 +33,7 @@ if (!dir.exists(here::here('data/derived-data/ConditionLayers/100m'))) {
 plan(multisession, workers = parallel::detectCores() - 1)
 
 # Read clustering scheme
-clus.scheme <- read.xlsx(here('data/derived-data/FunctionalGroups/List-of-clustering-schemes.xlsx'))
+clus.scheme <- read.xlsx(here('data/raw-data/FunctionalGroups/List-of-clustering-schemes.xlsx'))
 timestep = 5
 
 # Define scenario grid
@@ -59,7 +59,7 @@ full.rm <- future_lapply(seq_len(nrow(clus.scheme)), function(gpe) {
   
   # Read species list
   species_file <- here(sprintf(
-    'data/derived-data/FunctionalGroups/Species-list_withTraits_%s_GroupID_K=%d.xlsx',
+    'data/raw-data/FunctionalGroups/Species-list_withTraits_%s_GroupID_K=%d.xlsx',
     group_name, nclus
   ))
   sp <- read.xlsx(species_file)
@@ -139,7 +139,7 @@ write.xlsx(full.rm, here('data/derived-data/SourceLayers/GroupToRemove-noSource.
 # ############################## 2. For transient state, calculates mean resistance maps ###############################
 # #####################################################################################################################
 # Read clustering scheme
-clus.scheme <- read.xlsx(here('data/derived-data/FunctionalGroups/List-of-clustering-schemes.xlsx'))
+clus.scheme <- read.xlsx(here('data/raw-data/FunctionalGroups/List-of-clustering-schemes.xlsx'))
 timestep = 5
 
 # Define scenario grid
@@ -159,7 +159,7 @@ for (gpe in 1:nrow(clus.scheme)) {
   
   # Read species list
   species_file <- here(sprintf(
-    'data/derived-data/FunctionalGroups/Species-list_withTraits_%s_GroupID_K=%d.xlsx',
+    'data/raw-data/FunctionalGroups/Species-list_withTraits_%s_GroupID_K=%d.xlsx',
     group_name, nclus
   ))
   sp <- read.xlsx(species_file)
@@ -199,7 +199,7 @@ for (gpe in 1:nrow(clus.scheme)) {
 # ############################## 3. For transient state, calculates source and condition maps #########################
 # #####################################################################################################################
 # Read clustering scheme
-clus.scheme <- read.xlsx(here('data/derived-data/FunctionalGroups/List-of-clustering-schemes.xlsx'))
+clus.scheme <- read.xlsx(here('data/raw-data/FunctionalGroups/List-of-clustering-schemes.xlsx'))
 timestep = 5
 
 # Define scenario grid
@@ -219,7 +219,7 @@ for (gpe in 1:nrow(clus.scheme)) {
   
   # Read species list
   species_file <- here(sprintf(
-    'data/derived-data/FunctionalGroups/Species-list_withTraits_%s_GroupID_K=%d.xlsx',
+    'data/raw-data/FunctionalGroups/Species-list_withTraits_%s_GroupID_K=%d.xlsx',
     group_name, nclus
   ))
   sp <- read.xlsx(species_file)

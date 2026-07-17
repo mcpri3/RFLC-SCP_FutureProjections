@@ -97,7 +97,7 @@ g_legend <- function(a_gplot) {
 # ==> ECgif 
 
 ########################################################################################
-################### Evolution of EC area ###############################################
+################### Trends of EC area ###############################################
 ########################################################################################
 
 ec.area <- openxlsx::read.xlsx(here::here('outputs/Indicators/EcologicalContinuitiesArea.xlsx'))
@@ -222,12 +222,8 @@ val <- rbind(val, val.transient)
 val$GroupID <- paste0( unlist(lapply(strsplit(val$BigGroup, ''), function(x){
   return(paste(toupper(x[1:3]), collapse = ''))
 })), val$Group)
-# colnames(val)
 val <- dplyr::left_join(val, ep.type, by = c('Type'='TYPE'))
 val$ratio.perc.area <- val$Perc.overlap.corrid/val$EC.area.km2 
-# val$ratio.perc.area[is.na(val$ratio.perc.area)] <- 0
-
-openxlsx::write.xlsx(val, here::here('outputs/Indicators/StandardizedEC-PAOverlap.xlsx'))
 saveRDS(val, here::here('outputs/Indicators/StandardizedEC-PAOverlap'))
 
 # Supp Mat figures 
@@ -575,7 +571,6 @@ p2
 ggsave(p2, filename = here::here('figures/EvolutionGlobalPCmetric.png'), width = 10)
 
 # Supp Mat figures 
-# rmarkdown::render(here::here('figures/GetStandardizedGlobalPCmetric.Rmd'))
 rmarkdown::render(here::here('figures/GetGlobalPCmetric.Rmd'))
 
 # Sankey plot
@@ -703,21 +698,6 @@ for (p in all.ep$SITECODE) {
 all.ep <- sf::st_read(here::here('./data/raw-data/ProtectedAreas/AICHI_STRICT_NOTSTRICT_NO-OVERLAP.shp'), quiet = T)
 all.ep$SITECODE <- paste(all.ep$SITECODE, all.ep$TYPE, sep="|")
 
-#Standardized local PC metric 
-localPC.stat <- foreach::foreach(p = all.ep$SITECODE) %dopar% {
-  PC.df <- readRDS(here::here(paste0('outputs/Indicators/LocalPCmetric_', p)))
-  full.stats <- data.frame()
-  for (g in unique(PC.df$GroupID)) {
-    sub.df <- PC.df[PC.df$GroupID %in% g,]
-    stats <- run.mods(df = sub.df, y.col = 'StandardPC_flux_i', PA = 2)
-    full.stats <- rbind(full.stats, stats)
-  }
-  return(full.stats)
-}
-# rbind outputs
-stats <- do.call(rbind, localPC.stat)
-openxlsx::write.xlsx(stats, here::here('outputs/Indicators/Trends_StandardizedLocalPCmetric.xlsx'))
-
 # Local PC metric 
 localPC.stat <- foreach::foreach(p = all.ep$SITECODE) %dopar% {
   PC.df <- readRDS(here::here(paste0('outputs/Indicators/LocalPCmetric_', p)))
@@ -829,41 +809,6 @@ for (g in lev.biggp) {
   
   dev.off()
 }
-
-# # General 
-# all.ep.c <- sf::st_centroid(all.ep)
-# all.ep.c <- dplyr::left_join(all.ep.c, df.plot[, c(1, 4)], by = 'SITECODE')
-# 
-# full.px <- list()
-# for (p in unique(all.ep.c$TYPE_simple)) {
-#   
-#   all.ep.c.p <- all.ep.c[all.ep.c$TYPE_simple %in% p ,]
-#   all.ep.c.p.con <- all.ep.c.p[!(all.ep.c.p$TREND_ACROSS_GRP %in% 'Not connected'),]
-#   all.ep.c.p.notcon <- all.ep.c.p[all.ep.c.p$TREND_ACROSS_GRP %in% 'Not connected' ,]
-#   
-#   p.lab <- ifelse(p == 'Natural or biological reserve (buffer zone) (NS)',
-#                   'Natural or biological reserve \n(buffer zone) (NS)', ifelse(p == 'National hunting and wildlife reserve (NS)', 'National hunting and wildlife reserve \n(NS)', p))
-#   
-#   px <- ggplot(data = spdf_france) +
-#     geom_sf() +
-#     geom_sf(data = all.ep.c.p.notcon, aes(shape = TREND_ACROSS_GRP), size = 1) +
-#     geom_sf(data = all.ep.c.p.con, aes(fill = TREND_ACROSS_GRP, colour = TREND_ACROSS_GRP), shape = 21, size = 3) +
-#     ggtitle(paste0(toupper(letters)[which(p == unique(all.ep.c$TYPE_simple))], '. ', p.lab)) + 
-#     scale_fill_manual(values = c("#01665E", "#377EB8", "darkblue", "#E41A1C", "darkred", "gray10","darkgrey", "orange"), 
-#                       breaks = c('No change', 'Abrupt increase', 'Increase', 'Abrupt decrease', 'Decrease', 'Concave', 'U-shape', 'No consensus across groups'))+
-#     scale_colour_manual(values = c("#01665E", "#377EB8", "darkblue", "#E41A1C", "darkred", "gray10","darkgrey", "orange"), 
-#                         breaks = c('No change', 'Abrupt increase', 'Increase', 'Abrupt decrease', 'Decrease', 'Concave', 'U-shape', 'No consensus across groups'))+
-#     scale_shape_manual(name = '', values = 4) + 
-#     cowplot::theme_cowplot(font_size = 20) +
-#     theme(legend.position = 'none')
-#   
-#   full.px[[p]] <- px
-# }
-# full.px[[length(full.px)+1]] <- leg
-# 
-# pdf(here::here(paste0('figures/GeneralTrendLocalPCmetric.pdf')), height = 16, width = 27)
-# gridExtra::grid.arrange(grobs = full.px, ncol = 4, nrow = 3)
-# dev.off()
 
 # Supp Mat figures 
 stats$evol <- factor(stats$evol, levels = c('No change', 'Abrupt increase', 'Increase', 'Abrupt decrease', 'Decrease', 'Concave', 'U-shape', 'Not connected'))

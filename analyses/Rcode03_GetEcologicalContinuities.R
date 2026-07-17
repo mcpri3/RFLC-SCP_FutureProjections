@@ -31,7 +31,7 @@ if (!dir.exists(here::here('outputs/EcologicalContinuities/'))) {
 # The parameter files are located in the /data/derived-data/OmniscapeParamFiles folder
 
 # Required general dataset 
-combi.doable <- openxlsx::read.xlsx(here::here('data/derived-data/FunctionalGroups/List-of-clustering-schemes.xlsx'))
+combi.doable <- openxlsx::read.xlsx(here::here('data/raw-data/FunctionalGroups/List-of-clustering-schemes.xlsx'))
 # Parameter setting 
 timestep <- 5
 p.threshold <- seq(0.5, 0.5, by = 0.1) #suitability threshold 
@@ -52,7 +52,7 @@ for (i in 1:nrow(combi.doable)) {
   k <- combi.doable$Nclus[i] #total number of groups for a class
   
   # Read species list
-  lst.sp <- openxlsx::read.xlsx(here::here(paste0('data/derived-data/FunctionalGroups/Species-list_withTraits_', g , '_GroupID_K=', k, '.xlsx')))
+  lst.sp <- openxlsx::read.xlsx(here::here(paste0('data/raw-data/FunctionalGroups/Species-list_withTraits_', g , '_GroupID_K=', k, '.xlsx')))
   lst.sp <- lst.sp[lst.sp$SPECIES_NAME_SYNONYM != "Pelophylax grafi",]
 
   for (c in c(1:k)) { #for each group
@@ -140,7 +140,7 @@ write.table(full.param.full, here::here('data/derived-data/BatchRun/list-of-para
 # The parameter files are located in the /data/derived-data/OmniscapeParamFiles folder
 
 # Required general dataset 
-combi.doable <- openxlsx::read.xlsx(here::here('data/derived-data/FunctionalGroups/List-of-clustering-schemes.xlsx'))
+combi.doable <- openxlsx::read.xlsx(here::here('data/raw-data/FunctionalGroups/List-of-clustering-schemes.xlsx'))
 # Parameter setting 
 timestep <- 5
 p.threshold <- seq(0.5, 0.5, by = 0.1) #suitability threshold 
@@ -161,7 +161,7 @@ for (i in 1:nrow(combi.doable)) {
   k <- combi.doable$Nclus[i] #total number of groups for a class
   
   # Read species list
-  lst.sp <- openxlsx::read.xlsx(here::here(paste0('data/derived-data/FunctionalGroups/Species-list_withTraits_', g , '_GroupID_K=', k, '.xlsx')))
+  lst.sp <- openxlsx::read.xlsx(here::here(paste0('data/raw-data/FunctionalGroups/Species-list_withTraits_', g , '_GroupID_K=', k, '.xlsx')))
   lst.sp <- lst.sp[lst.sp$SPECIES_NAME_SYNONYM != "Pelophylax grafi",]
 
   for (c in c(1:k)) { #for each group
